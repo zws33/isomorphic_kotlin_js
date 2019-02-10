@@ -29,14 +29,12 @@ kotlinFrontend {
         dependency("react-dom")
         dependency("react-markdown")
 
-        devDependency("css-loader")
         devDependency("style-loader")
     }
 
     webpackBundle {
         bundleName = "main"
         contentPath = file('src/main/web')
-        proxyUrl = "http://localhost:8080"
     }
 }
 

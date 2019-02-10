@@ -1,12 +1,9 @@
-import kotlin.browser.document
-import kotlinext.js.*
 import react.*
 import react.dom.*
+import kotlin.browser.document
 import kotlin.browser.window
 
 fun main() {
-    requireAll(require.context("src", true, js("/\\.css$/")))
-
     render(document.getElementById("root")) {
         app()
     }
