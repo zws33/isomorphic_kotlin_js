@@ -1,0 +1,3 @@
+/Users/zacharysmith/Workspace/isomorphic_kotlin_js/frontend/build/node_modules/kotlin-test
+/Users/zacharysmith/Workspace/isomorphic_kotlin_js/frontend/build/node_modules/kotlin
+/Users/zacharysmith/Workspace/isomorphic_kotlin_js/frontend/build/node_modules/kotlinx-html-js
