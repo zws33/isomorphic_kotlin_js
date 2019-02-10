@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/isomorphic_kotlin_js.iml" filepath="$PROJECT_DIR$/.idea/isomorphic_kotlin_js.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/isomorphic_kotlin_js.backend.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/isomorphic_kotlin_js.backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/isomorphic_kotlin_js.backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/isomorphic_kotlin_js.backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/isomorphic_kotlin_js.backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/isomorphic_kotlin_js.backend.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/frontend/isomorphic_kotlin_js.frontend.iml" filepath="$PROJECT_DIR$/.idea/modules/frontend/isomorphic_kotlin_js.frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/frontend/isomorphic_kotlin_js.frontend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/frontend/isomorphic_kotlin_js.frontend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/frontend/isomorphic_kotlin_js.frontend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/frontend/isomorphic_kotlin_js.frontend.test.iml" />
+    </modules>
+  </component>
+</project>
