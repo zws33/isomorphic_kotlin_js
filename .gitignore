@@ -63,9 +63,9 @@ typings/
 .next
 ### Gradle template
 .gradle
-/build/
-/frontend/build/
-/backend/build/
+**/build/
+/frontend/build/*
+/backend/build/*
 
 # Ignore Gradle GUI config
 gradle-app.setting
