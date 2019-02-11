@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="full-stack-example.frontend.main" target="1.8" />
+      <module name="full-stack-example.frontend.test" target="1.8" />
+      <module name="full-stack-example.server-side.main" target="1.8" />
+      <module name="full-stack-example.server-side.test" target="1.8" />
+      <module name="isomorphic_kotlin_js.backend.main" target="1.8" />
+      <module name="isomorphic_kotlin_js.backend.test" target="1.8" />
+      <module name="isomorphic_kotlin_js.frontend.main" target="1.8" />
+      <module name="isomorphic_kotlin_js.frontend.test" target="1.8" />
+      <module name="isomorphic_kotlin_js.server-side.main" target="1.8" />
+      <module name="isomorphic_kotlin_js.server-side.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,1 @@
+fun generateId() = (0..10000).random()
