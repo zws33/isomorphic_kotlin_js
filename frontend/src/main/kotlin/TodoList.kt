@@ -54,10 +54,10 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         div("row justify-content-center") {
             div("col-md-6") {
                 ul("list-group") {
-                    for (item in state.todos) {
+                    for (todo in state.todos) {
                         li("list-group-item d-flex justify-content-between align-items-center") {
-                            +item.title
-                            deleteButton("DELETE") { deleteTodo(item) }
+                            +todo.title
+                            deleteButton("DELETE") { deleteTodo(todo) }
                         }
                     }
                 }
