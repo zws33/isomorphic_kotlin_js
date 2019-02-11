@@ -80,10 +80,9 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
     }
 
     private fun fetchTodosFromNetwork() {
-        xhrGet("https://jsonplaceholder.typicode.com/todos") { response ->
-            val todos: List<TodoModel> = JSON.parse(response)
+        xhrGet("https://jsonplaceholder.typicode.com/todos/1") { response ->
             setState {
-                items += todos
+                items += JSON.parse<TodoModel>(response)
             }
         }
     }
