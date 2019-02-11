@@ -55,10 +55,10 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
 
             h3 {
                 ul {
-                    for (item in state.todos) {
+                    for (todo in state.todos) {
                         li {
-                            +item.title
-                            deleteButton(item, ::deleteTodo)
+                            +todo.title
+                            deleteButton(todo, ::deleteTodo)
                         }
                     }
                 }
