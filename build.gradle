@@ -11,6 +11,7 @@ allprojects {
         dependencies {
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
             classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.44"
+            classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         }
     }
 }
