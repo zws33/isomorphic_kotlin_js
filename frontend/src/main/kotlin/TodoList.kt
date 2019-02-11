@@ -2,6 +2,8 @@ import kotlinx.html.InputType
 import kotlinx.html.LI
 import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onClickFunction
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.list
 import org.w3c.dom.HTMLInputElement
 import react.*
 import react.dom.*
@@ -11,13 +13,13 @@ interface TodoListProps : RProps {
 }
 
 interface TodoListState : RState {
-    var items: List<TodoModel>
+    var todos: List<TodoModel>
     var text: String
 }
 
 class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(props) {
     override fun TodoListState.init(props: TodoListProps) {
-        items = props.initialItems
+        todos = props.initialItems
         text = ""
     }
 
@@ -53,10 +55,10 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
 
             h3 {
                 ul {
-                    for (item in state.items) {
+                    for (todo in state.todos) {
                         li {
-                            +item.title
-                            deleteButton(item, ::deleteTodo)
+                            +todo.title
+                            deleteButton(todo, ::deleteTodo)
                         }
                     }
                 }
@@ -75,14 +77,14 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
 
     private fun deleteTodo(selectedTodo: TodoModel) {
         setState {
-            items = items.filter { todoModel -> todoModel != selectedTodo }
+            todos = todos.filter { todoModel -> todoModel.id != selectedTodo.id }
         }
     }
 
     private fun fetchTodosFromNetwork() {
-        xhrGet("https://jsonplaceholder.typicode.com/todos/1") { response ->
+        xhrGet("https://jsonplaceholder.typicode.com/todos") { response ->
             setState {
-                items += JSON.parse<TodoModel>(response)
+                todos += Json.parse(TodoModel.serializer().list, response)
             }
         }
     }
@@ -90,7 +92,7 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
     private fun addTodo() {
         if (state.text.isNotEmpty()) {
             setState {
-                items += TodoModel(
+                todos += TodoModel(
                     userId = 1,
                     id = generateId(),
                     title = text,
