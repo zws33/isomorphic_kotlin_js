@@ -1,3 +1,4 @@
+import kotlinx.html.DIV
 import kotlinx.html.InputType
 import kotlinx.html.LI
 import kotlinx.html.js.onChangeFunction
@@ -24,41 +25,39 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
     }
 
     override fun RBuilder.render() {
-        div {
-            input(type = InputType.text, name = "itemText") {
-                key = "itemText"
+        div("row justify-content-center") {
+            div("col-md-12") {
+                div("input-group mb-3") {
+                    input(type = InputType.text, name = "itemText", classes = "form-control") {
+                        key = "itemText"
 
-                attrs {
-                    value = state.text
-                    placeholder = "Add a to-do item"
-                    onChangeFunction = {
-                        val target = it.target as HTMLInputElement
-                        setState {
-                            text = target.value
+                        attrs {
+                            value = state.text
+                            placeholder = "Add a to-do item"
+                            onChangeFunction = {
+                                val target = it.target as HTMLInputElement
+                                setState {
+                                    text = target.value
+                                }
+                            }
                         }
+                    }
+
+                    div("input-group-append") {
+                        primaryButton("Add", ::addTodo)
+                        primaryButton("Get Todos From Network", ::fetchTodosFromNetwork)
                     }
                 }
             }
+        }
 
-            button {
-                +"Add"
-                attrs {
-                    onClickFunction = { addTodo() }
-                }
-            }
-            button {
-                +"Get Todos From Network"
-                attrs {
-                    onClickFunction = { fetchTodosFromNetwork() }
-                }
-            }
-
-            h3 {
-                ul {
+        div("row justify-content-center") {
+            div("col-md-6") {
+                ul("list-group") {
                     for (item in state.todos) {
-                        li {
+                        li("list-group-item d-flex justify-content-between align-items-center") {
                             +item.title
-                            deleteButton(item, ::deleteTodo)
+                            deleteButton("DELETE") { deleteTodo(item) }
                         }
                     }
                 }
@@ -66,25 +65,20 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun RDOMBuilder<LI>.deleteButton(item: TodoModel, deleteTodo: (TodoModel) -> Unit ) {
-        button {
-            +"DELETE"
+    private fun RDOMBuilder<DIV>.primaryButton(btnText: String, onClick: () -> Unit) {
+        button(classes = "btn btn-outline-secondary") {
+            +btnText
             attrs {
-                onClickFunction = { deleteTodo(item) }
+                onClickFunction = { onClick() }
             }
         }
     }
 
-    private fun deleteTodo(selectedTodo: TodoModel) {
-        setState {
-            todos = todos.filter { todoModel -> todoModel.id != selectedTodo.id }
-        }
-    }
-
-    private fun fetchTodosFromNetwork() {
-        xhrGet("https://jsonplaceholder.typicode.com/todos") { response ->
-            setState {
-                todos += Json.parse(TodoModel.serializer().list, response)
+    private fun RDOMBuilder<LI>.deleteButton(btnText: String, onClick: () -> Unit) {
+        button(classes = "badge badge-danger badge-pill") {
+            +btnText
+            attrs {
+                onClickFunction = { onClick() }
             }
         }
     }
@@ -103,6 +97,19 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
+    private fun deleteTodo(selectedTodo: TodoModel) {
+        setState {
+            todos = todos.filter { todoModel -> todoModel.id != selectedTodo.id }
+        }
+    }
+
+    private fun fetchTodosFromNetwork() {
+        xhrGet("https://jsonplaceholder.typicode.com/todos") { response ->
+            setState {
+                todos += Json.parse(TodoModel.serializer().list, response)
+            }
+        }
+    }
 }
 
 fun RBuilder.todoList(items: List<TodoModel> = listOf()) = child(TodoList::class) {
