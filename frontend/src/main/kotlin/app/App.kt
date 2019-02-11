@@ -10,12 +10,12 @@ import todoList
 
 class App : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
-        div {
-            h2 {
-                +"Welcome to React with Kotlin"
+        div("container") {
+            div("row") {
+                h2("display-1") {
+                    +"Welcome to React with Kotlin"
+                }
             }
-        }
-        div {
             todoList()
         }
     }
