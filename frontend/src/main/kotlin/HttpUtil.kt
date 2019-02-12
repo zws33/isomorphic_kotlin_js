@@ -1,12 +1,12 @@
 import org.w3c.xhr.XMLHttpRequest
 
 fun xhrGet(url: String, callback: (String) -> Unit) {
-    val xmlHttp = XMLHttpRequest()
-    xmlHttp.open("GET", url)
-    xmlHttp.onload = {
-        if (xmlHttp.readyState == 4.toShort() && xmlHttp.status == 200.toShort()) {
-            callback.invoke(xmlHttp.responseText)
+    val request = XMLHttpRequest()
+    request.open("GET", url)
+    request.onload = {
+        if (request.readyState == 4.toShort() && request.status == 200.toShort()) {
+            callback(request.responseText)
         }
     }
-    xmlHttp.send()
+    request.send()
 }

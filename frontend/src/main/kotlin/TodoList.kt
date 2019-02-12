@@ -24,38 +24,45 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
 
     override fun RBuilder.render() {
         div("row justify-content-center") {
-            div("input-group mb-3") {
-                input(type = InputType.text, name = "itemText", classes = "form-control") {
-                    key = "itemText"
-
-                    attrs {
-                        value = state.text
-                        placeholder = "Add a to-do item"
-                        onChangeFunction = {
-                            val target = it.target as HTMLInputElement
-                            setState {
-                                text = target.value
-                            }
-                        }
-                    }
-                }
-
-                div("input-group-append") {
-                    primaryButton("Add", ::addTodo)
-                    primaryButton("Get Todos From Network", ::fetchTodosFromNetwork)
-                }
-            }
-
+            inputGroup()
         }
 
         div("row justify-content-center") {
-            ul("list-group") {
-                state.todos.forEachIndexed { index, todo ->
-                    li("list-group-item d-flex justify-content-between align-items-center") {
-                        key = index.toString()
-                        +todo.title
-                        deleteButton("DELETE") { deleteTodo(todo) }
+            todosGroup()
+        }
+    }
+
+    private fun RDOMBuilder<*>.inputGroup() {
+        div("input-group mb-3") {
+            input(type = InputType.text, name = "itemText", classes = "form-control") {
+                key = "itemText"
+
+                attrs {
+                    value = state.text
+                    placeholder = "Add a to-do item"
+                    onChangeFunction = {
+                        val target = it.target as HTMLInputElement
+                        setState {
+                            text = target.value
+                        }
                     }
+                }
+            }
+
+            div("input-group-append") {
+                primaryButton("Add", ::addTodo)
+                primaryButton("Get Todos From Network", ::fetchTodosFromNetwork)
+            }
+        }
+    }
+
+    private fun RDOMBuilder<*>.todosGroup() {
+        ul("list-group") {
+            state.todos.forEachIndexed { index, todo ->
+                li("list-group-item d-flex justify-content-between align-items-center") {
+                    key = index.toString()
+                    +todo.title
+                    deleteButton("DELETE") { deleteTodo(todo) }
                 }
             }
         }
