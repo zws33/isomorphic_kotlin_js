@@ -42,7 +42,7 @@ kotlinFrontend {
 compileKotlin2Js {
     kotlinOptions {
         metaInfo = true
-        outputFile = "$project.buildDir.path/js/${project.name}.js"
+        outputFile = "$project.buildDir.path/js/index.js"
         sourceMap = true
         moduleKind = 'commonjs'
         main = "call"
