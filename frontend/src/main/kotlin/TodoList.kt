@@ -1,6 +1,4 @@
-import kotlinx.html.DIV
 import kotlinx.html.InputType
-import kotlinx.html.LI
 import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onClickFunction
 import kotlinx.serialization.json.Json
@@ -54,8 +52,9 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         div("row justify-content-center") {
             div("col-md-6") {
                 ul("list-group") {
-                    for (todo in state.todos) {
+                    state.todos.forEachIndexed { index, todo ->
                         li("list-group-item d-flex justify-content-between align-items-center") {
+                            key = index.toString()
                             +todo.title
                             deleteButton("DELETE") { deleteTodo(todo) }
                         }
@@ -65,7 +64,7 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun RDOMBuilder<DIV>.primaryButton(btnText: String, onClick: () -> Unit) {
+    private fun RDOMBuilder<*>.primaryButton(btnText: String, onClick: () -> Unit) {
         button(classes = "btn btn-outline-secondary") {
             +btnText
             attrs {
@@ -74,7 +73,7 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun RDOMBuilder<LI>.deleteButton(btnText: String, onClick: () -> Unit) {
+    private fun RDOMBuilder<*>.deleteButton(btnText: String, onClick: () -> Unit) {
         button(classes = "badge badge-danger badge-pill") {
             +btnText
             attrs {

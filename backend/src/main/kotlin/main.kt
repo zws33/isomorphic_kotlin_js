@@ -1,14 +1,10 @@
-
 external fun require(module: String): dynamic
-external val __dirname: dynamic
 
 fun main() {
-    println("Hello JavaScript!")
-
     val express = require("express")
-    val app = express()
-
     val request = require("request")
+
+    val app = express()
 
     app.use(express.static("public"))
 
@@ -17,7 +13,7 @@ fun main() {
     }
 
     app.get("/todos") { req, res ->
-        request.get(js("({url: 'https://jsonplaceholder.typicode.com/todos'})")) { err, response, body ->
+        request.get("https://jsonplaceholder.typicode.com/todos") { err, response, body ->
             res.type("text/json")
             res.send(response.body)
         }

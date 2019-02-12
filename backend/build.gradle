@@ -12,5 +12,5 @@ dependencies {
 
 compileKotlin2Js {
     kotlinOptions.moduleKind = 'commonjs'
-    kotlinOptions.outputFile = "$buildDir/js/index.js"
+    kotlinOptions.outputFile = "$buildDir/js/main.js"
 }
