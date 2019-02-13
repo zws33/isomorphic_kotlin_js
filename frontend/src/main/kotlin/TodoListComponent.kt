@@ -8,15 +8,15 @@ import react.*
 import react.dom.*
 
 interface TodoListProps : RProps {
-    var initialItems: List<TodoModel>
+    var initialItems: List<TodoItem>
 }
 
 interface TodoListState : RState {
-    var todos: List<TodoModel>
+    var todos: List<TodoItem>
     var text: String
 }
 
-class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(props) {
+class TodoListComponent(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(props) {
     override fun TodoListState.init(props: TodoListProps) {
         todos = props.initialItems
         text = ""
@@ -24,16 +24,16 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
 
     override fun RBuilder.render() {
         div("row justify-content-center") {
-            inputGroup()
+            inputGroupComponent()
         }
 
         div("row justify-content-center") {
-            todosGroup()
+            todosComponent()
         }
     }
 
-    private fun RDOMBuilder<*>.inputGroup() {
-        div("input-group mb-3") {
+    private fun RDOMBuilder<*>.inputGroupComponent(): ReactElement {
+        return div("input-group mb-3") {
             input(type = InputType.text, name = "itemText", classes = "form-control") {
                 key = "itemText"
 
@@ -56,8 +56,10 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun RDOMBuilder<*>.todosGroup() {
-        ul("list-group") {
+
+
+    private fun RDOMBuilder<*>.todosComponent(): ReactElement {
+        return ul("list-group") {
             state.todos.forEachIndexed { index, todo ->
                 li("list-group-item d-flex justify-content-between align-items-center") {
                     key = index.toString()
@@ -68,8 +70,8 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun RDOMBuilder<*>.primaryButton(btnText: String, onClick: () -> Unit) {
-        button(classes = "btn btn-outline-secondary") {
+    private fun RDOMBuilder<*>.primaryButton(btnText: String, onClick: () -> Unit): ReactElement {
+        return button(classes = "btn btn-outline-secondary") {
             +btnText
             attrs {
                 onClickFunction = { onClick() }
@@ -77,8 +79,8 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun RDOMBuilder<*>.deleteButton(btnText: String, onClick: () -> Unit) {
-        button(classes = "badge badge-danger badge-pill") {
+    private fun RDOMBuilder<*>.deleteButton(btnText: String, onClick: () -> Unit): ReactElement {
+        return button(classes = "badge badge-danger badge-pill") {
             +btnText
             attrs {
                 onClickFunction = { onClick() }
@@ -89,7 +91,7 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
     private fun addTodo() {
         if (state.text.isNotEmpty()) {
             setState {
-                todos += TodoModel(
+                todos += TodoItem(
                     userId = 1,
                     id = generateId(),
                     title = text,
@@ -100,7 +102,7 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
         }
     }
 
-    private fun deleteTodo(selectedTodo: TodoModel) {
+    private fun deleteTodo(selectedTodo: TodoItem) {
         setState {
             todos = todos.filter { todoModel -> todoModel.id != selectedTodo.id }
         }
@@ -109,12 +111,12 @@ class TodoList(props: TodoListProps) : RComponent<TodoListProps, TodoListState>(
     private fun fetchTodosFromNetwork() {
         xhrGet("https://jsonplaceholder.typicode.com/todos") { response ->
             setState {
-                todos += Json.parse(TodoModel.serializer().list, response)
+                todos += Json.parse(TodoItem.serializer().list, response)
             }
         }
     }
 }
 
-fun RBuilder.todoList(items: List<TodoModel> = listOf()) = child(TodoList::class) {
+fun RBuilder.todoListComponent(items: List<TodoItem> = listOf()) = child(TodoListComponent::class) {
     attrs.initialItems = items
 }

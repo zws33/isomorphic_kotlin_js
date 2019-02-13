@@ -25,10 +25,10 @@ kotlinFrontend {
 
     npm {
         dependency "style-loader"
-        dependency("react")
-        dependency("react-dom")
+        dependency "react"
+        dependency "react-dom"
 
-        devDependency("karma")
+        devDependency "karma"
     }
 
     webpackBundle {
@@ -39,10 +39,10 @@ kotlinFrontend {
 
 compileKotlin2Js {
     kotlinOptions {
-        metaInfo = true
-        outputFile = "$project.buildDir.path/js/index.js"
-        sourceMap = true
         moduleKind = 'commonjs'
+        outputFile = "$project.buildDir.path/js/index.js"
+        metaInfo = true
+        sourceMap = true
         main = "call"
     }
 }

@@ -1,4 +1,4 @@
-package app
+package appComponent
 
 import react.RBuilder
 import react.RComponent
@@ -6,9 +6,9 @@ import react.RProps
 import react.RState
 import react.dom.div
 import react.dom.h2
-import todoList
+import todoListComponent
 
-class App : RComponent<RProps, RState>() {
+class AppComponent : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
         div("container") {
             div("row") {
@@ -16,10 +16,10 @@ class App : RComponent<RProps, RState>() {
                     +"Welcome to React with Kotlin"
                 }
             }
-            todoList()
+            todoListComponent()
         }
     }
 }
 
-fun RBuilder.app() = child(App::class) {}
+fun RBuilder.appComponent() = child(AppComponent::class) {}
 
